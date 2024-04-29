@@ -5,8 +5,8 @@ import { TextField, Button, Container, Box } from "@mui/material";
 const Login = ({ onSubmit }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { username, password } = event.target.elements;
-    onSubmit(username.value, password.value);
+    const { email, password } = event.target.elements;
+    onSubmit(email.value, password.value);
   };
 
   return (
@@ -24,10 +24,10 @@ const Login = ({ onSubmit }) => {
             margin="normal"
             required
             fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
+            id="email"
+            label="Email"
+            name="email"
+            autoComplete="email"
             autoFocus
           />
           <TextField
