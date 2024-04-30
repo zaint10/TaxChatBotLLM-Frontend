@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AppBar, Button, Toolbar, Typography, Radio } from "@mui/material";
+import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 
 const StyledAppBar = styled(AppBar)`
