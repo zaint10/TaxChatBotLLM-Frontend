@@ -7,6 +7,7 @@ import SignUpPage from "./pages/SignUp";
 import ChatPage from "./pages/Chat";
 import AllChatsPage from './pages/AllChatsPage';
 import Layout from "./pages/Layout";
+import withSplashScreen from "./with/withSplashScreen";
 
 
 function withLayout(children) {
@@ -30,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default withSplashScreen(App);

@@ -3,12 +3,12 @@ import { BrowserRouter } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import axios from "axios";
 import reportWebVitals from "./reportWebVitals";
 import AuthProvider from "react-auth-kit";
 import createStore from "react-auth-kit/createStore";
 import createRefresh from "react-auth-kit/createRefresh";
 import { SnackbarProvider } from "./context/SnackbarContext";
+import apiService from "./service/apiService";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -16,8 +16,8 @@ const refresh = createRefresh({
   interval: 1, // The time in sec to refresh the Access token
   refreshApiCallback: async (param) => {
     try {
-      const response = await axios.post(
-        "http://localhost:8000/token/refresh/",
+      const response = await apiService.post(
+        "/token/refresh/",
         { refresh: param.refreshToken },
         {
           headers: { Authorization: `Bearer ${param.authToken}` },

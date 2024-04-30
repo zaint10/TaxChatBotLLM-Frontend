@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import W2FileUpload from "../components/W2FileUpload";
 import { useSnackbar } from "../context/SnackbarContext";
-import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import apiService from "../service/apiService";
 
 const HomePage = () => {
   const [loading, setLoading] = useState(false);
   const { openSnackbar } = useSnackbar();
-  const authHeader = useAuthHeader();
   const navigate = useNavigate();
 
   const handleUpload = async (event) => {
@@ -17,13 +15,12 @@ const HomePage = () => {
       const file = event.target.files[0];
       const formData = new FormData();
       formData.append("file", file);
-      const response = await axios.post(
-        "http://localhost:8000/upload/",
+      const response = await apiService.post(
+        "/upload/",
         formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: authHeader,
           },
         }
       );

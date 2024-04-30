@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
 import AllChats from "../components/AllChats";
-import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
-import axios from "axios";
 import { useSnackbar } from "../context/SnackbarContext";
+import apiService from "../service/apiService";
 
 const AllChatsPage = () => {
-  const authHeader = useAuthHeader();
   const [chats, setChats] = useState([]);
   const [loading, setLoading] = useState(true);
   const { openSnackbar } = useSnackbar();
 
   useEffect(() => {
     const fetchAllChats = async () => {
+      console.log("Fetching all")
       try {
-        const response = await axios.get("http://localhost:8000/w2form/", {
-          headers: {
-            Authorization: authHeader,
-          },
-        });
+        const response = await apiService.get("/w2form/");
         setChats(response.data);
         setLoading(false);
       } catch (error) {
@@ -26,7 +21,7 @@ const AllChatsPage = () => {
       }
     };
     fetchAllChats();
-  }, [authHeader, openSnackbar]);
+  }, [openSnackbar]);
 
   return (
     <div>
