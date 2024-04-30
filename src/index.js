@@ -8,15 +8,16 @@ import reportWebVitals from "./reportWebVitals";
 import AuthProvider from "react-auth-kit";
 import createStore from "react-auth-kit/createStore";
 import createRefresh from "react-auth-kit/createRefresh";
+import { SnackbarProvider } from "./context/SnackbarContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const refresh = createRefresh({
-  interval: 60, // The time in sec to refresh the Access token
+  interval: 1, // The time in sec to refresh the Access token
   refreshApiCallback: async (param) => {
     try {
       const response = await axios.post(
-        "/refresh",
+        "http://localhost:8000/token/refresh/",
         { refresh: param.refreshToken },
         {
           headers: { Authorization: `Bearer ${param.authToken}` },
@@ -46,11 +47,13 @@ const store = createStore({
 
 root.render(
   <React.StrictMode>
-    <AuthProvider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </AuthProvider>
+    <SnackbarProvider>
+      <AuthProvider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </AuthProvider>
+    </SnackbarProvider>
   </React.StrictMode>
 );
 

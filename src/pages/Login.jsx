@@ -29,7 +29,6 @@ const LoginPage = () => {
         userState: {
           email,
         },
-        isSignIn: true,
       });
       navigate("/");
     } catch (error) {
