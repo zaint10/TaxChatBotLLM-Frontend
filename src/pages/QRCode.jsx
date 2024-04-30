@@ -38,7 +38,7 @@ const QRCodePage = () => {
       openSnackbar(error.message);
     }
     setLoading(false);
-  }, []);
+  }, [openSnackbar]);
   return (
     <div>
       {authUser.is_2fa_enabled ? (
