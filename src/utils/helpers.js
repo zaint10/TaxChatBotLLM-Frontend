@@ -26,5 +26,6 @@ export const useEffectOnce = (effect) => {
         destroyFunc.current();
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
