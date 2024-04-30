@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import SignUp from "../components/SignUp";
 import { useNavigate } from "react-router-dom";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
