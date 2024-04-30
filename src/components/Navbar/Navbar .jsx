@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AppBar, Button, Toolbar, Typography } from "@mui/material";
+import { AppBar, Button, Toolbar, Typography, Radio } from "@mui/material";
 import styled from "@emotion/styled";
 
 const StyledAppBar = styled(AppBar)`
@@ -38,7 +38,7 @@ const UserContainer = styled.div`
   gap: 1rem;
 `;
 
-const Navbar = ({ userEmail, onSignOut }) => {
+const Navbar = ({ authUser, onSignOut }) => {
   return (
     <StyledAppBar>
       <StyledToolbar>
@@ -51,11 +51,17 @@ const Navbar = ({ userEmail, onSignOut }) => {
         </Navigation>
         <UserContainer>
           <Typography variant="body1" component="div">
-            {userEmail}
+            {authUser.email}
           </Typography>
           <Button color="secondary" variant="contained" onClick={onSignOut}>
             Logout
           </Button>
+          <NavLink to="/get-qr-code">
+            <Button color="secondary" variant="contained" onClick={onSignOut} disabled={authUser.is_2fa_enabled}>
+              Enable 2FA
+            </Button>
+            
+          </NavLink>
         </UserContainer>
       </StyledToolbar>
     </StyledAppBar>

@@ -10,7 +10,6 @@ const AllChatsPage = () => {
 
   useEffect(() => {
     const fetchAllChats = async () => {
-      console.log("Fetching all")
       try {
         const response = await apiService.get("/w2form/");
         setChats(response.data);

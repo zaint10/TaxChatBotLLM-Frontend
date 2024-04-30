@@ -3,22 +3,21 @@ import ChatInterface from "../components/ChatInterface";
 import { useParams } from "react-router-dom";
 import { useEffectOnce } from "../utils/helpers";
 import apiService from "../service/apiService";
-
+import { useSnackbar } from "../context/SnackbarContext";
 
 const ChatPage = () => {
+  const { openSnackbar } = useSnackbar();
   const { w2formId } = useParams();
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingFormDetails, setLoadingFormDetails] = useState(1);
+  const [isOtpVerified, setIsOtpVerified] = useState(false);
 
-  
   useEffectOnce(() => {
     const fetchFormDetails = async () => {
       try {
-        const response = await apiService.get(
-          `/w2form/${w2formId}`,
-        );
+        const response = await apiService.get(`/w2form/${w2formId}`);
         setLoadingFormDetails(false);
         setMessages((prevMessages) => [
           { type: "system", text: response.data.data },
@@ -46,7 +45,7 @@ const ChatPage = () => {
           `http://localhost:8000/chat/${w2formId}`,
           {
             question: message,
-          },
+          }
         );
         setMessages((prevMessages) => [
           ...prevMessages,
@@ -58,6 +57,40 @@ const ChatPage = () => {
       setLoading(false);
     }
   };
+
+  const handleVerfiyOTP = async (otp) => {
+    try {
+      const response = await apiService.post(`/verify-qr-code-otp/`, {
+        otp,
+      });
+      setIsOtpVerified(true);
+      return response;
+    } catch (error) {
+      openSnackbar(error.message);
+      setIsOtpVerified(false);
+    }
+  };
+
+  const handleFetchEmployeeSSN = async (otp) => {
+    try {
+      if (!isOtpVerified) {
+        openSnackbar("Please verify OTP");
+      }
+      const response = await apiService.get(
+        `/w2form/${w2formId}/sensitive-info/`,
+        {
+          headers: {
+            "X-OTP": otp,
+          }
+        }
+      );
+      return response;
+    } catch (error) {
+      setIsOtpVerified(false);
+      openSnackbar(error.message);
+    }
+  };
+
   return (
     <div>
       <ChatInterface
@@ -67,6 +100,9 @@ const ChatPage = () => {
         onSubmit={handleSubmit}
         loadingFormDetails={loadingFormDetails}
         loading={loading}
+        isOtpVerified={isOtpVerified}
+        handleVerfiyOTP={handleVerfiyOTP}
+        handleFetchEmployeeSSN={handleFetchEmployeeSSN}
       />
     </div>
   );

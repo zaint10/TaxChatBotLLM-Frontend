@@ -38,9 +38,7 @@ const LoginPage = () => {
           type: "Bearer",
         },
         refresh: response.data.refresh,
-        userState: {
-          email,
-        },
+        userState: response.data.user,
       });
       navigate("/");
     } catch (error) {

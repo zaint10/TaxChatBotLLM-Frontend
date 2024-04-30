@@ -5,7 +5,7 @@ import useSignOut from "react-auth-kit/hooks/useSignOut";
 import { useNavigate } from "react-router-dom";
 
 const Layout = ({ children }) => {
-  const auth = useAuthUser();
+  const authUser = useAuthUser();
   const signOut = useSignOut();
   const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
 
   return (
     <div>
-      <Navbar userEmail={auth.email} onSignOut={handleSignOut} />
+      {authUser && <Navbar authUser={authUser} onSignOut={handleSignOut} />}
       {children}
     </div>
   );

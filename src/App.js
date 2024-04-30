@@ -8,6 +8,7 @@ import ChatPage from "./pages/Chat";
 import AllChatsPage from './pages/AllChatsPage';
 import Layout from "./pages/Layout";
 import withSplashScreen from "./with/withSplashScreen";
+import QRCodePage from "./pages/QRCode";
 
 
 function withLayout(children) {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={withLayout(<HomePage />)} />
           <Route path="/chats" element={withLayout(<AllChatsPage />)} />
           <Route path="/chat/:w2formId" element={withLayout(<ChatPage />)} />
+          <Route path="/get-qr-code" element={withLayout(<QRCodePage />)} />
         </Route>
 
         <Route exact path="/login" element={<LoginPage />} />

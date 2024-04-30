@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "../logo.svg";
+import logo from "../taxchatbot_logo.png";
 import styled from "@emotion/styled";
 
 const Container = styled.div`

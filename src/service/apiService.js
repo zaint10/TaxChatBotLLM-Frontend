@@ -31,6 +31,7 @@ apiService.interceptors.response.use(
   (error) => {
     // Construct error message
     let errorMessage = "An error occurred";
+    debugger;
     const { code } = error;
     if (error.response) {
       // The request was made and the server responded with a status code

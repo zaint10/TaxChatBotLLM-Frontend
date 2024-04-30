@@ -17,6 +17,7 @@ import {
 } from "@mui/icons-material";
 import styled from "@emotion/styled";
 import ReactMarkdown from "react-markdown";
+import ShowSSN from "./ShowSSN";
 
 const StyledContainer = styled(Container)`
   display: flex;
@@ -88,6 +89,10 @@ const ChatInterface = ({
   onSubmit,
   loadingFormDetails,
   loading,
+  handleVerfiyOTP,
+  isOtpVerified,
+  employeeSSN,
+  handleFetchEmployeeSSN,
 }) => {
   const messageContainerRef = useRef(null);
 
@@ -163,6 +168,12 @@ const ChatInterface = ({
           }}
         />
       </ChatForm>
+      <ShowSSN
+        onHandleVerfiyOTP={handleVerfiyOTP}
+        isOtpVerified={isOtpVerified}
+        employeeSSN={employeeSSN}
+        onFetchEmployeeSSN={handleFetchEmployeeSSN}
+      />
     </StyledContainer>
   );
 };
