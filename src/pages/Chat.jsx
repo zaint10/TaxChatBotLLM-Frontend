@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useEffectOnce } from "../utils/helpers";
 import apiService from "../service/apiService";
 import { useSnackbar } from "../context/SnackbarContext";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const ChatPage = () => {
   const { openSnackbar } = useSnackbar();
@@ -11,7 +12,7 @@ const ChatPage = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [loadingFormDetails, setLoadingFormDetails] = useState(1);
+  const [loadingFormDetails, setLoadingFormDetails] = useState(true);
   const [isOtpVerified, setIsOtpVerified] = useState(false);
   console.log(isOtpVerified);
 
@@ -25,6 +26,7 @@ const ChatPage = () => {
         ]);
       } catch (error) {
         console.error("Error fetching form details:", error);
+        setMessages(null);
         setLoadingFormDetails(false);
       }
     };
@@ -42,12 +44,9 @@ const ChatPage = () => {
       setMessage("");
 
       try {
-        const response = await apiService.post(
-          `/chat/${w2formId}`,
-          {
-            question: message,
-          }
-        );
+        const response = await apiService.post(`/chat/${w2formId}`, {
+          question: message,
+        });
         setMessages((prevMessages) => [
           ...prevMessages,
           { type: "system", text: response.data.response },
@@ -79,7 +78,7 @@ const ChatPage = () => {
         {
           headers: {
             "X-OTP": otp,
-          }
+          },
         }
       );
       return response;
@@ -91,17 +90,27 @@ const ChatPage = () => {
 
   return (
     <div>
-      <ChatInterface
-        message={message}
-        setMessage={setMessage}
-        messages={messages}
-        onSubmit={handleSubmit}
-        loadingFormDetails={loadingFormDetails}
-        loading={loading}
-        isOtpVerified={isOtpVerified}
-        handleVerfiyOTP={handleVerfiyOTP}
-        handleFetchEmployeeSSN={handleFetchEmployeeSSN}
-      />
+      {!messages && !loadingFormDetails ? (
+        <div>
+          <h1>
+            We couldn't locate any data associated with the provided W2 form ID.
+          </h1>
+        </div>
+      ) : (
+        <div>
+          <ChatInterface
+            message={message}
+            setMessage={setMessage}
+            messages={messages}
+            onSubmit={handleSubmit}
+            loadingFormDetails={loadingFormDetails}
+            loading={loading}
+            isOtpVerified={isOtpVerified}
+            handleVerfiyOTP={handleVerfiyOTP}
+            handleFetchEmployeeSSN={handleFetchEmployeeSSN}
+          />
+        </div>
+      )}
     </div>
   );
 };
