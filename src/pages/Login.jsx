@@ -61,7 +61,7 @@ const LoginPage = () => {
 
   return (
     <LoginContainer>
-      <h1>Let's get you sign in!</h1>
+      <h1>Let's ROCK get you sign in!</h1>
       <Login onSubmit={handleSubmit} />
       <div>
         <NavLink to="/signup">
