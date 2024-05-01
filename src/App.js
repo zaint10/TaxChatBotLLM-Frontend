@@ -7,7 +7,7 @@ import SignUpPage from "./pages/SignUp";
 import ChatPage from "./pages/Chat";
 import AllChatsPage from "./pages/AllChatsPage";
 import Layout from "./pages/Layout";
-import withSplashScreen from "./with/withSplashScreen";
+// import withSplashScreen from "./with/withSplashScreen";
 import QRCodePage from "./pages/QRCode";
 import { UserProvider } from "./context/UserContext";
 

@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { useEffectOnce } from "../utils/helpers";
 import apiService from "../service/apiService";
 import { useSnackbar } from "../context/SnackbarContext";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const ChatPage = () => {
   const { openSnackbar } = useSnackbar();
