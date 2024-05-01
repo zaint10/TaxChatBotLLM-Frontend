@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import QRCode from "../components/QRCode";
 import apiService from "../service/apiService";
 import { useSnackbar } from "../context/SnackbarContext";
-import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import { useAuthUserWrapper } from "../context/UserContext";
+
 
 const QRCodePage = () => {
   const [loading, setLoading] = useState(true);
   const [qrCodeValue, setqrCodeValue] = useState("");
   const { openSnackbar } = useSnackbar();
-  const authUser = useAuthUser();
+  const [isVierified, setIsVerified] = useState(false);
+  const { authUser, updateAuthUser } = useAuthUserWrapper();
 
   const handleQRCodeVerification = async (otp) => {
     try {
@@ -16,6 +18,8 @@ const QRCodePage = () => {
       await apiService.post("/verify-qr-code-otp/", {
         otp,
       });
+      updateAuthUser();
+      setIsVerified(true);
       return true;
     } catch (error) {
       openSnackbar(error.message);
@@ -41,7 +45,7 @@ const QRCodePage = () => {
   }, [openSnackbar]);
   return (
     <div>
-      {authUser.is_2fa_enabled ? (
+      {isVierified || authUser.is_2fa_enabled ? (
         <h1>2FA for your account is enabled.</h1>
       ) : (
         <div>

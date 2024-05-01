@@ -45,13 +45,14 @@ const store = createStore({
   refresh: refresh,
 });
 
+
 root.render(
   <React.StrictMode>
     <SnackbarProvider>
       <AuthProvider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
       </AuthProvider>
     </SnackbarProvider>
   </React.StrictMode>

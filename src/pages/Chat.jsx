@@ -13,6 +13,7 @@ const ChatPage = () => {
   const [loading, setLoading] = useState(false);
   const [loadingFormDetails, setLoadingFormDetails] = useState(1);
   const [isOtpVerified, setIsOtpVerified] = useState(false);
+  console.log(isOtpVerified);
 
   useEffectOnce(() => {
     const fetchFormDetails = async () => {
@@ -42,7 +43,7 @@ const ChatPage = () => {
 
       try {
         const response = await apiService.post(
-          `http://localhost:8000/chat/${w2formId}`,
+          `/chat/${w2formId}`,
           {
             question: message,
           }
@@ -73,9 +74,6 @@ const ChatPage = () => {
 
   const handleFetchEmployeeSSN = async (otp) => {
     try {
-      if (!isOtpVerified) {
-        openSnackbar("Please verify OTP");
-      }
       const response = await apiService.get(
         `/w2form/${w2formId}/sensitive-info/`,
         {

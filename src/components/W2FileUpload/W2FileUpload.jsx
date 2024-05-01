@@ -47,7 +47,7 @@ const W2FileUpload = ({ onUpload, loading }) => {
         onChange={handleUpload}
       />
       <label htmlFor="file-upload">
-        <UploadButton variant="contained" color="primary" component="span">
+        <UploadButton variant="contained" color="primary" component="span" disabled={loading}>
           Upload File
         </UploadButton>
       </label>

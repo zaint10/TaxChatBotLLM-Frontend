@@ -5,17 +5,22 @@ import HomePage from "./pages/Home";
 import LoginPage from "./pages/Login";
 import SignUpPage from "./pages/SignUp";
 import ChatPage from "./pages/Chat";
-import AllChatsPage from './pages/AllChatsPage';
+import AllChatsPage from "./pages/AllChatsPage";
 import Layout from "./pages/Layout";
 import withSplashScreen from "./with/withSplashScreen";
 import QRCodePage from "./pages/QRCode";
-
+import { UserProvider } from "./context/UserContext";
 
 function withLayout(children) {
-  return <Layout>{children}</Layout>;
+  return (
+    <UserProvider>
+      <Layout>{children}</Layout>
+    </UserProvider>
+  );
 }
 
 function App() {
+  // const authUerAK = useAuthUser()
   return (
     <div>
       <Routes>

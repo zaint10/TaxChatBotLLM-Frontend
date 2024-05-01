@@ -57,7 +57,7 @@ const Navbar = ({ authUser, onSignOut }) => {
             Logout
           </Button>
           <NavLink to="/get-qr-code">
-            <Button color="secondary" variant="contained" onClick={onSignOut} disabled={authUser.is_2fa_enabled}>
+            <Button color="secondary" variant="contained" disabled={authUser.is_2fa_enabled}>
               Enable 2FA
             </Button>
             

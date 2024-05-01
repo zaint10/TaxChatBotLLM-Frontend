@@ -5,6 +5,7 @@ import useSignOut from "react-auth-kit/hooks/useSignOut";
 import { useNavigate } from "react-router-dom";
 import apiService from "../service/apiService";
 import { useSnackbar } from "../context/SnackbarContext";
+import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
 
 const LoginContainer = styled.div`
@@ -14,6 +15,17 @@ const LoginContainer = styled.div`
   justify-content: start;
   min-height: 100vh;
   width: 100%;
+`;
+
+const NavLink = styled(Link)`
+  color: inherit;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0;
+  }
+  &:hover {
+    color: #007bff;
+  }
 `;
 
 const LoginPage = () => {
@@ -51,6 +63,11 @@ const LoginPage = () => {
     <LoginContainer>
       <h1>Let's get you sign in!</h1>
       <Login onSubmit={handleSubmit} />
+      <div>
+        <NavLink to="/signup">
+          <h3>Don't have an acocunt?</h3>
+        </NavLink>
+      </div>
     </LoginContainer>
   );
 };

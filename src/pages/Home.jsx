@@ -27,7 +27,7 @@ const HomePage = () => {
       openSnackbar(response.data.message);
       navigate(`chat/${response.data.data.w2form_id}`);
     } catch (error) {
-      console.error("Error uploading file:", error);
+      openSnackbar(error.message)
     } finally {
       setLoading(false);
     }
