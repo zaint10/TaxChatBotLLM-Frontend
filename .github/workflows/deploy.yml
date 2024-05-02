@@ -19,7 +19,7 @@ jobs:
       run: npm install
     
     - name: Echo current working directory
-      run: echo "Current working directory: $PWD"
+      run: echo "Current working directory $PWD"
 
     - name: Create .env file
       uses: SpicyPizza/create-envfile@v1
@@ -32,7 +32,7 @@ jobs:
       run: npm run build
 
     - name: Echo current working directory
-      run: echo "Current working directory: $PWD"
+      run: echo "Current working directory {{ $PWD }}"
 
     - name: Deploy to AWS S3
       uses: jakejarvis/s3-sync-action@master
