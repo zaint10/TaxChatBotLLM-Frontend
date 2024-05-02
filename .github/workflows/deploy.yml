@@ -17,15 +17,22 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+    
+    - name: Echo current working directory
+      run: echo "Current working directory: $PWD"
 
     - name: Create .env file
       uses: SpicyPizza/create-envfile@v1
       with:
         envkey_NODE_ENV: ${{ env.NODE_ENV }}
         envkey_REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
-        directory: .
         file_name: .env
-    - run: npm run build
+    
+    - name: Build app
+      run: npm run build
+
+    - name: Echo current working directory
+      run: echo "Current working directory: $PWD"
 
     - name: Deploy to AWS S3
       uses: jakejarvis/s3-sync-action@master
