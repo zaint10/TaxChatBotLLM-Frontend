@@ -17,17 +17,19 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+    
+    name: Create .env file
+      uses: SpicyPizza/create-envfile@v1
+      with:
+        envkey_REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
 
     - name: Build React app
       run: npm run build
-      env:
-        NODE_ENV: production
-        REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
 
     - name: Deploy to AWS S3
       uses: jakejarvis/s3-sync-action@master
       with:
-        args: --acl public-read --follow-symlinks --delete
+        args: --follow-symlinks --delete
       env:
         AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
