@@ -33,7 +33,6 @@ const LoginPage = () => {
   const signOut = useSignOut();
   const navigate = useNavigate();
   const { openSnackbar } = useSnackbar();
-  console.log("REACT_APP_API_URL", process.env.REACT_APP_API_URL);
 
   useEffect(() => {
     signOut();
