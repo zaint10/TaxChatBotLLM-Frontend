@@ -28,7 +28,8 @@ jobs:
         envkey_REACT_Z_NAME: zain
         envkey_REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
         file_name: .env
-      run: npm run build
+      
+    - run: npm run build
 
     - name: Echo current working directory
       run: echo "Current working directory {{ $PWD }}"
