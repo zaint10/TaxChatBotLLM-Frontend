@@ -34,6 +34,9 @@ jobs:
     
     - name: List directory contents
       run: ls -al
+    
+    - name: Display .env file contents
+      run: cat .env
 
     - name: Deploy to AWS S3
       uses: jakejarvis/s3-sync-action@master
