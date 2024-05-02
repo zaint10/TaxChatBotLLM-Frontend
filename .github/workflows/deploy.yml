@@ -24,8 +24,6 @@ jobs:
         envkey_NODE_ENV: ${{ env.NODE_ENV }}
         envkey_REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
         file_name: .env
-    
-    - name: Build
     - run: npm run build
 
     - name: Deploy to AWS S3
