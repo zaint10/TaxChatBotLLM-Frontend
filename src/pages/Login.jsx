@@ -35,6 +35,7 @@ const LoginPage = () => {
   const { openSnackbar } = useSnackbar();
   console.log("REACT_APP_API_URL", process.env.REACT_APP_API_URL);
   console.log("REACT_Z_NAME", process.env.REACT_APP_Z_NAME);
+  console.log("NODE_ENV", process.env.NODE_ENV);
 
   useEffect(() => {
     signOut();
