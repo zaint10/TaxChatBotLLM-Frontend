@@ -14,12 +14,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-    
-    - name: Echo current working directory
-      run: echo "Current working directory {{ $PWD }}"
-    
-    - name: List directory contents
-      run: ls -al
 
     - name: Install dependencies
       run: npm install
@@ -28,14 +22,18 @@ jobs:
       uses: SpicyPizza/create-envfile@v1
       with:
         envkey_NODE_ENV: ${{ env.NODE_ENV }}
-        envkey_REACT_Z_NAME: zain
+        envkey_REACT_Z_NAME: 'zain'
         envkey_REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
         file_name: .env
     
     - name: Build app
       run: npm run build
 
+    - name: Echo current working directory
+      run: echo "Current working directory {{ $PWD }}"
     
+    - name: List directory contents
+      run: ls -al
 
     - name: Deploy to AWS S3
       uses: jakejarvis/s3-sync-action@master
