@@ -17,13 +17,11 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-    
-    name: Create .env file
-      uses: SpicyPizza/create-envfile@v1
-      with:
-        envkey_REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
 
-    - name: Build React app
+    - name: Create .env file and Build React app
+      uses: SpicyPizza/create-envfile@v1
+        with:
+        envkey_REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
       run: npm run build
 
     - name: Deploy to AWS S3
